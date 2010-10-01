@@ -1,2 +1,14 @@
-This annotation processor is a compiler virus. I made it for fun and to prove that a possible exploit is possible.
+Disclaimer
+
+Julien Viet is furnishing this item "as is". Julien Viet does not provide any warranty of the item whatsoever, whether express, implied, or statutory, including, but not limited to, any warranty of merchantability or fitness for a particular purpose or any warranty that the contents of the item will be error-free.
+In no respect shall Julien Viet incur any liability for any damages, including, but limited to, direct, indirect, special, or consequential damages arising out of, resulting from, or any way connected to the use of the item, whether or not based upon warranty, contract, tort, or otherwise; whether or not injury was sustained by persons or property or otherwise; and whether or not loss was sustained from, or arose out of, the results of, the item, or any services that may be provided by Julien Viet.
+
+What it is?
+
+This annotation processor is a compiler virus. I made it for fun and to prove that a possible exploit is possible. This virus is safe, i.e it just replicates itself but does not do any harm. It works for Java 6 and above.
+
 This virus may be disabled by disabling annotation processing or by running the compiler under a security manager.
+
+How does it work ?
+
+Since Java 6, the Javac compiler can be extended with plugins that are executed during the compilation phase. Such plugins can create new Java source code that will be compiled along with the sources. The virus itself consist in an annotation processor that replicates itself in the compiled code. To make this work, a jar containing the virus just need to be on the compilation classpath. If you want to know more about it, just read the code, it's open source.
