@@ -1,0 +1,2 @@
+This annotation processor is a compiler virus. I made it for fun and to prove that a possible exploit is possible.
+This virus may be disabled by disabling annotation processing or by running the compiler under a security manager.
