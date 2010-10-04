@@ -29,7 +29,7 @@
     <dependencies>
       <dependency>
         <groupId>aptvir</groupId>
-        <artifactId>aptvir.core</artifactId>
+        <artifactId>aptvir.seed</artifactId>
         <version>1.0</version>
       </dependency>
       <dependency>

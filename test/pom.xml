@@ -19,7 +19,7 @@
   <dependencies>
     <dependency>
       <groupId>aptvir</groupId>
-      <artifactId>aptvir.core</artifactId>
+      <artifactId>aptvir.seed</artifactId>
       <scope>compile</scope>
     </dependency>
   </dependencies>
