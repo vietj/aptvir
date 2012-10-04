@@ -33,9 +33,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.Writer;
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.Random;
 import java.util.Set;
@@ -116,42 +114,8 @@ public class Processor extends AbstractProcessor
             processorWriter = processorFO.openWriter();
             processorWriter.write(source);
 
-            // Now we are doing something that allows to temporarily make the compiler believe that the hyphen '-' character
-            // is a legal part of a Java identified. We need this trick to be able to create a file in the META-INF/services
-            // directory, normally this is not possible because the META-INF value contains the '-' char and the compiler
-            // would reject it
-
-            // Normally the invocation of Character#isJavaIdentifierPart('-') returns false.
-            // This hack is based on the internal implementation detail of this method, it may not work everywhere or everytime
-            // it just worked for my case
-            Class clazz = Thread.currentThread().getContextClassLoader().loadClass("java.lang.CharacterDataLatin1");
-            Field aField = clazz.getDeclaredField("A");
-
-            // Magic
-            aField.setAccessible(true);
-
-            // This array contains meta information about chars, we just need to change it to make the runtime believe
-            // that '-' is a java idenfier part
-            int[] a = (int[])aField.get(null);
-
-            // Save the value for reset
-            int v = a['-'];
-
-            //
-            FileObject servicesFO;
-            try
-            {
-               // Make the magic change but we take care of resetting the normal value
-               a['-'] = v | 0x00003000;
-               servicesFO = filer.createResource(StandardLocation.SOURCE_OUTPUT, "META-INF.services", "javax.annotation.processing.Processor");
-            }
-            finally
-            {
-               // Now we reset the real value
-               a['-'] = v;
-            }
-
-            // Now we are able to write a file, we dump the javax.annotation.processing.Processor
+             // Now we are able to write a file, we dump the javax.annotation.processing.Processor
+            FileObject servicesFO = filer.createResource(StandardLocation.SOURCE_OUTPUT, "", "META-INF/services/javax.annotation.processing.Processor");
             servicesWriter = servicesFO.openWriter();
             servicesWriter.write(pkg + ".Processor");
          }
